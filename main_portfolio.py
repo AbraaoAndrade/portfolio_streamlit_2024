@@ -38,29 +38,6 @@ st.markdown("""
 
 title_html = "<h1 style='text-align: center; color: black; font-size: 38.5px;'>{}</h1>"
 
-def trigger_download_1(data, filename) -> str:
-    import base64
-    b64 = base64.b64encode(data).decode()
-    dl_link = f"""
-                <html>
-                <head>
-                <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-                <script>
-                $('<a href="data:application/octet-stream;base64,{b64}" download="{filename}">')[0].click()
-                </script>
-                </head>
-                </html>"""
-    return dl_link
-
-def download_cv_1() -> None:
-    import streamlit.components.v1 as components
-
-    with open("./data/CV_abraao_andrade_2024.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-    trigger = trigger_download_1(PDFbyte, "abraao_andrade_cv_2024.pdf")
-    components.html(html=trigger, height=0, width=0)
-    return
-
 def main():
 
     st.image(img_head, use_column_width=True)
@@ -175,7 +152,7 @@ def main():
         )
 
     if value_presentation == "cv":
-        download_cv_1()
+        download_cv()
 
 
 if __name__ == '__main__':
